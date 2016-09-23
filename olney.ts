@@ -2,23 +2,23 @@
  * Motors that can be driven
  */
 enum Motor {
-    //% block="1"
-    Motor1 = 0x01,
-    //% block="2"
-    Motor2 = 0x10,
-    //% block="1&2"
-    Motor1And2 = 0x11
+    //% block="A"
+    MotorA = 0x01,
+    //% block="B"
+    MotorB = 0x10,
+    //% block="A&B"
+    MotorAandB = 0x11
 }
 
 /**
  * Actions that we can do with the Motors
  */
 enum MotorAction {
-    //% block="drive forward"
+    //% block="Forward"
     Forward,
-    //% block="drive in reverse"
+    //% block="Reverse"
     Reverse,
-    //% block="brake"
+    //% block="Brake"
     Brake
 }
 
@@ -29,20 +29,21 @@ enum MotorAction {
 //% color=#00A655 weigth=2
 namespace olney {
     /**
-     * Controls two independant motors.
+     * Drive 2 Motors, direction & with PWM power control,
+     * DRV8835 Driver connected A:Dir=P8, PWM=P1; B:Dir=P12, PWM=P2
      * @param motor name of the motor(s)
      * @param required motor action
-     * @param power level
+     * @param power level (0-1023)
      */
     //% blockId=olney_motor_drive
-    //% block="Motor %motor|action %action|power %power"
+    //% block="Motor %motor|direction %action|power %power"
     //% weight=80
     //% blockGap=8
     export function motorAction(motor: Motor, action: MotorAction, power: number) {
-        if (motor & < number > Motor.Motor1) {
+        if (motor & < number > Motor.MotorA) {
             pinAction(DigitalPin.P8, AnalogPin.P1, action, power);
         }
-        if (motor & < number > Motor.Motor2) {
+        if (motor & < number > Motor.MotorB) {
             pinAction(DigitalPin.P12, AnalogPin.P2, action, power);
         }
     }
@@ -55,18 +56,13 @@ namespace olney {
             case MotorAction.Brake: power = 0; break;
             default:
         }
+        /**
+         * PWM using a 200uS period to achive 5KHz
+         * unfortunately this only gives around 50 levels
+         */
         pins.digitalWritePin(p0, p0v);
         pins.analogWritePin(p1, power);
         pins.analogSetPeriod(p1, 200);
     }
 
-    /**
-     * Converts the motor name into a number.
-     * @param motor name of the motor
-     */
-    //% blockId=olney_motor_id
-    //% block = "%motor"  
-    export function motorId(motor: Motor): number {
-        return motor;
-    }
 }
