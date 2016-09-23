@@ -31,6 +31,7 @@ namespace olney {
     //% blockId=olney_motor_drive
     //% block="motor %motor=motor_id|action %action|power %power"
     //% weight=80
+    //% blockGap=8
     export function motorAction(motor: number, action: MotorAction, power: number) {
         if (motor & < number > Motor.Motor1) {
             pinAction(DigitalPin.P8, AnalogPin.P1, action, power);
