@@ -1,6 +1,6 @@
 {
     "name": "Olney",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Custom PXT package for CoderDojo Olney projects",
     "license": "MIT",
     "dependencies": {
@@ -15,4 +15,3 @@
     ],
     "public": true
 }
-
