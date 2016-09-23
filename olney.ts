@@ -1,12 +1,18 @@
+/**
+ * Motors that can be driven
+ */
 enum Motor {
-    //% block=1
+    //% block="1""
     Motor1 = 0x01,
-    //% block=2
+    //% block="2""
     Motor2 = 0x10,
     //% block="1&2"
     Motor1And2 = 0x11
 }
 
+/**
+ * Actions that we can do with the Motors
+ */
 enum MotorAction {
     //% block="drive forward"
     Forward,
@@ -29,10 +35,10 @@ namespace olney {
      * @param power level
      */
     //% blockId=olney_motor_drive
-    //% block="motor %motor=motor_id|action %action|power %power"
+    //% block="Motor %motor|action %action|power %power"
     //% weight=80
     //% blockGap=8
-    export function motorAction(motor: number, action: MotorAction, power: number) {
+    export function motorAction(motor: Motor, action: MotorAction, power: number) {
         if (motor & < number > Motor.Motor1) {
             pinAction(DigitalPin.P8, AnalogPin.P1, action, power);
         }
@@ -59,8 +65,7 @@ namespace olney {
      * @param motor name of the motor
      */
     //% blockId=olney_motor_id
-    //% block = "%motor"
-    //% shim=TD_ID    
+    //% block = "%motor"  
     export function motorId(motor: Motor): number {
         return motor;
     }
