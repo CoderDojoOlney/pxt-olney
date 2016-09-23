@@ -2,9 +2,9 @@
  * Motors that can be driven
  */
 enum Motor {
-    //% block="1""
+    //% block="1"
     Motor1 = 0x01,
-    //% block="2""
+    //% block="2"
     Motor2 = 0x10,
     //% block="1&2"
     Motor1And2 = 0x11
