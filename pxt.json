@@ -8,7 +8,10 @@
     },
     "files": [
         "README.md",
-        "olney.ts"
+        "olney.ts",
+        "olney.cpp",
+        "shims.d.ts",
+        "enums.d.ts"
     ],
     "testFiles": [
         "tests.ts"

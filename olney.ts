@@ -25,8 +25,10 @@ enum MotorAction {
 /**
  * A set of functions to work with DRV8835 based motor driver
  * connected to P1,2,8 & 12
+ * This package deliberately uses a mix of TypeScript and C++ to explore how
+ * to use the pxt capabilities and shims...
  */
-//% color=#00A655 weigth=2
+//% color=270 weigth=10
 namespace olney {
     /**
      * Drive 2 Motors, direction & with PWM power control,
