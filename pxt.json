@@ -11,7 +11,8 @@
         "olney.ts",
         "olney.cpp",
         "shims.d.ts",
-        "enums.d.ts"
+        "enums.d.ts",
+        "pxt.json"
     ],
     "testFiles": [
         "tests.ts"
