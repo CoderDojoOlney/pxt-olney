@@ -53,11 +53,19 @@ namespace olney {
     //% weight=10 
     //% blockGap=8
     export function setMotorPolarity(motor: Motor, polarity: MotorPolarity) {
-         if (motor & <number> Motor.MotorA) {
-             motorAReversed = (MotorPolarity.Reversed == polarity);
-         }
-         if (motor & <number> Motor.MotorB) {
-             motorBReversed = (MotorPolarity.Reversed == polarity);
+        if (motor & <number>Motor.MotorA) {
+            if (polarity == MotorPolarity.Reversed) {
+                motorAReversed = true;
+            } else {
+                motorAReversed = false;
+            }
+        }
+        if (motor & <number>Motor.MotorB) {
+            if (polarity == MotorPolarity.Reversed) {
+                motorBReversed = true;
+            } else {
+                motorBReversed = false;
+            }
          }
     }
 
@@ -69,6 +77,10 @@ namespace olney {
     //% weight=10 
     //% blockGap=8
     export function setMotorFrequency(frequency: number) {
+        // Limit frequency to valid range
+        if (10000 < frequency) frequency = 10000;
+        if (100 > frequency) frequency = 100;
+
         motorPWMPeriod = 1000000 / frequency;
     }
 
@@ -84,15 +96,28 @@ namespace olney {
     //% weight=80
     //% blockGap=8
     export function motorAction(motor: Motor, action: MotorAction, power: number) {
-        if (motor & <number> Motor.MotorA) {
-            pinAction(DigitalPin.P8, AnalogPin.P1, action, power);
+        let actual_action = action;
+        // Limit power to valid range
+        if (1023 < power) power = 1023;
+        if (0 > power) power = 0;
+
+        if (motor & <number>Motor.MotorA) {
+            if (motorAReversed) {
+                if (action == MotorAction.Forward) actual_action = MotorAction.Reverse;
+                if (action == MotorAction.Reverse) actual_action = MotorAction.Forward;
+            }
+            pinAction(DigitalPin.P8, AnalogPin.P1, actual_action, power);
         }
-        if (motor & <number> Motor.MotorB) {
-            pinAction(DigitalPin.P12, AnalogPin.P2, action, power);
+        if (motor & <number>Motor.MotorB) {
+            if (motorBReversed) {
+                if (action == MotorAction.Forward) actual_action = MotorAction.Reverse;
+                if (action == MotorAction.Reverse) actual_action = MotorAction.Forward;
+            }            
+            pinAction(DigitalPin.P12, AnalogPin.P2, actual_action, power);
         }        
     }
 
-        //%
+    //%
     function pinAction(p0: DigitalPin, p1: AnalogPin, action: MotorAction, power: number) {
         let p0v = 0;
         switch (action) {
