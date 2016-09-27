@@ -46,6 +46,17 @@ namespace olney {
     let motorPWMPeriod = 200;   // Default 200uS period 
 
     /**
+     * A means to add comments to code
+     */
+    //% blockId=olney_comment
+    //% block="comment %comment"
+    //% weight=10 
+    //% blockGap=8
+    export function Comment(comment: string) {
+        // The string is just a comment        
+    }    
+    
+    /**
      * Sets the Motor polarity - normal or reversed, so that you don't have to re-wire them to get Forward and Reverse to be correct
      */
     //% blockId=olney_set_motor_polarity 
