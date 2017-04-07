@@ -4,7 +4,7 @@
     "description": "Custom PXT package for CoderDojo Olney projects",
     "license": "MIT",
     "dependencies": {
-        "microbit": "*"
+        "core": "*"
     },
     "files": [
         "README.md",
