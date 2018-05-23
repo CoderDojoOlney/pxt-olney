@@ -1,6 +1,3 @@
-# pxt-olney
-bbc:microbit custom pxt package for CoderDojo Olney projects 
-
 # Olney package
 
 A set of functions to work with CoderDojo Olney projects
@@ -11,7 +8,15 @@ The Motor driver board allows control of 2 motors with power control
 
 * Move both motors forward at power of 1000
 ```blocks
-olney.motorAction(Motor.Motor1And2, MotorAction.Forward, 1000);
+input.onButtonPressed(Button.A, () => {
+    olney.motorAction(Motor.MotorA, MotorAction.Forward, 0)
+})
+input.onButtonPressed(Button.B, () => {
+    olney.motorAction(Motor.MotorB, MotorAction.Forward, 0)
+})
+input.onButtonPressed(Button.AB, () => {
+    olney.motorAction(Motor.MotorAandB, MotorAction.Brake, 0)
+})
 ```
 
 ## Supported targets
